@@ -52,7 +52,9 @@
 	<head>
 		<meta charset="utf-8">
 		<title>회원약관</title>
-		<link rel="stylesheet" href="/board1/css/style.css" />		
+		<link rel="stylesheet" href="/board1/css/style.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="/board1/js/termsCheck.js"></script>		
 	</head>
 	<body>
 		<div id="terms">
@@ -85,7 +87,7 @@
 			
 			<div>
 				<a href="/board1/user/login.jsp" class="btnCancel">취소</a>
-				<a href="/board1/user/register.jsp" class="btnNext">다음</a>
+				<a href="/board1/user/register.jsp" class="btnNext">다음</a> <%-- a태그는 자체적으로 클릭 이벤트를 가지구 있다! --%>
 			</div>
 			
 		</div>
