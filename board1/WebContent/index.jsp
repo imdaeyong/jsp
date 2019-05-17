@@ -1,6 +1,10 @@
+<%@page import="kr.co.board1.bean.UserBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
 <%
-	if(true){
+
+	UserBean ub =(UserBean)  session.getAttribute("user");
+
+	if(ub== null){
 		//로그인 안했을때
 		pageContext.forward("./user/login.jsp");
 	}else{

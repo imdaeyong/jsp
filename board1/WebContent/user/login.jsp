@@ -16,6 +16,9 @@
 			if(result == 'fail') {
 				alert('로그인실패\n회원정보를 확인하세요');
 			}
+			if(result=='101'){
+				alert('접근실패\n로그인을하세요');
+			}
 		</script>
 	</head>
 	<body>

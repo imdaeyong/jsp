@@ -9,16 +9,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String email = request.getParameter("email");
+	//String is = getElementsByName
 	
-	Connection conn = DBConfig.getConnection();	
+	Connection conn = DBConfig.getConnection();
+	
 	//3단계
-	PreparedStatement psmt = conn.prepareStatement(SQL.SELECT_EMAIL_COUNT);
-	psmt.setString(1, email);
+	PreparedStatement psmt = conn.prepareStatement(SQL.SELECT_USER_COUNT);
+	//psmt.setString(1, uid);
 	
 	//4단계
 	ResultSet rs =  psmt.executeQuery(); //COUNT로 있으면 1 없으면 0 반환
-		
+	
 	//5단계
 	int count = 0;
 	if(rs.next()) {

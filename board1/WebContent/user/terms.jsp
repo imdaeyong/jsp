@@ -1,3 +1,5 @@
+<%@page import="kr.co.board1.config.SQL"%>
+<%@page import="kr.co.board1.config.DBConfig"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -5,10 +7,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <% 
 	
-	final String HOST = "jdbc:mysql://192.168.0.161:3306/kdy";
-	final String USER = "kdy";
-	final String PASS = "1234";
-
 	Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
@@ -17,17 +15,14 @@
 	String privacy = null;
 	
 	try{
-		//1단계 드라이버 로드
-		Class.forName("com.mysql.jdbc.Driver");
 		
-		//2단계 접속
-		conn = DriverManager.getConnection(HOST,USER,PASS);
+		conn = DBConfig.getConnection();
 		
 		//3단계 sql 실행객체 생성
 		stmt = conn.createStatement();
 		
 		//4단계 sql 생성
-		rs = stmt.executeQuery("SELECT * FROM `JSP_TERMS`;");
+		rs = stmt.executeQuery(SQL.SELECT_TERMS);
 		
 		//5단계 결과셋 처리
 		if(rs.next()) {

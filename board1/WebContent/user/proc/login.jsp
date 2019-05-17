@@ -1,3 +1,5 @@
+<%@page import="kr.co.board1.config.SQL"%>
+<%@page import="kr.co.board1.config.DBConfig"%>
 <%@page import="kr.co.board1.bean.UserBean"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -12,28 +14,19 @@
 	String uid = request.getParameter("id");
 	String pass = request.getParameter("pw");
 	
-	final String HOST = "jdbc:mysql://192.168.0.161:3306/kdy";
-	final String USER = "kdy";
-	final String PASS = "1234";
-	
-	//1단계
-	Class.forName("com.mysql.jdbc.Driver");
-	
-	//2단계
-	Connection conn  = DriverManager.getConnection(HOST,USER,PASS);
+	Connection conn = DBConfig.getConnection();
 	
 	//3단계
-	String sql = "SELECT  * FROM `JSP_USER` WHERE uid=? AND pass=PASSWORD(?);"; //PASSWORD 암호를 암호화해주는 함수 
-	PreparedStatement psmt = conn.prepareStatement(sql);
+	 
+	PreparedStatement psmt = conn.prepareStatement(SQL.SELECT_USER);
 	psmt.setString(1, uid);
 	psmt.setString(2, pass);
 	
 	//4단계
 	ResultSet rs = psmt.executeQuery();
-	boolean log = false;
-	
+		
 	if(rs.next()){
-		//session.setAttribute("uid", rs.getString(1)); //이거 12개만드는거보다 자바빈 만드는게 ㅈㅎ음
+		//session.setAttribute("uid", rs.getString(1)); //이거 12개만드는거보다 자바빈 만드는게 좋음
 		UserBean ub = new UserBean();
 		ub.setUid(rs.getString(1));
 		ub.setPass(rs.getString(2));
