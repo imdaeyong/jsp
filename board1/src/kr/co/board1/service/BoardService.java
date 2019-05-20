@@ -6,14 +6,26 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import kr.co.board1.bean.BoardBean;
 import kr.co.board1.config.DBConfig;
 import kr.co.board1.config.SQL;
+import sun.security.jca.GetInstance;
 
 public class BoardService {
 
-	public int getStartForLimit(String pg ) {
+	//싱글톤 객체
+	private static BoardService service = new BoardService(); // 여기서 new를 해버린다면?
+	
+	private BoardService() {} //다른곳에서 new를 못하게함 !! 그냥 위의 service를 참조하면됨.
+	public static  BoardService GetInstance() { // 외부에서 service( private라 참조못함) 를 사용할수있게 해주는 메소드
+		return service;
+	}
+	
+	public int getListStartCount(int total,int start) { //목록용 카운트 번호 구하기
+		return total - start;
+	}
+	
+	public int getStartForLimit(String pg ) { //Limit 용 start 값 구하기
 		
 		int start = 0;
 		
@@ -23,8 +35,7 @@ public class BoardService {
 			start = Integer.parseInt(pg);
 		}
 		
-		return (start -1) *10;
-		
+		return (start -1) *10;		
 	}
 	
 	public int getTotalPage(int boardTotal)  { //전체 페이지 수 구하기
