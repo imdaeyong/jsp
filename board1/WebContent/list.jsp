@@ -21,49 +21,18 @@
 		//로그인을 안했을때
 		response.sendRedirect("./user/login.jsp?result=101");
 	}else{
+		request.setCharacterEncoding("UTF-8");
+		String pg = request.getParameter("pg");
 		
 		BoardService bs = new BoardService();
 		int total = bs.getTotalBoard(); //getTotalBoard에서 리턴값인 총 게시물수(total) 받아옴
 		totalPage = bs.getTotalPage(total); //getTotalPage에 대입.  getTotalBoard - > getTotalPage // 총 페이지수를 리턴값으로 받아옴
 		
-		
+		int start =bs.getStartForLimit(pg);  
 		
 		//로그인을 했을때
 		nick = ub.getNick();
-		
-		//1단계
-		//2단계
-		Connection conn = DBConfig.getConnection();
-				
-		//3단계
-		PreparedStatement psmt = conn.prepareStatement(SQL.SELECT_LIST);
-		
-		//4단계
-		ResultSet rs = psmt.executeQuery();
-		
-		//5단계		
-		
-		while(rs.next()){ //select 결과값이 여러개면 while을 쓰는듯. 아니면 if써도 무관
-			BoardBean bb = new BoardBean();		
-			bb.setSeq(rs.getInt(1));
-			bb.setParent(rs.getInt(2));
-			bb.setComment(rs.getInt(3));
-			bb.setCate(rs.getString(4));
-			bb.setTitle(rs.getString(5));
-			bb.setContent(rs.getString(6));
-			bb.setFile(rs.getInt(7));
-			bb.setHit(rs.getInt(8));
-			bb.setUid(rs.getString(9));
-			bb.setRegip(rs.getString(10));
-			bb.setRdate(rs.getString(11));
-			bb.setNick(rs.getString(12));
-			list.add(bb);
-		}
-				
-		//6단계
-		rs.close();
-		psmt.close();
-		conn.close();
+		list = bs.getBoardList(start); //이거 한줄로 압축, 1단계~6단계 boardservice로 보냄 //여기에 숫자 넣어주는거, 10이면 1페이지, 20이면 2페이지 이런식
 	}	
 	
 %>
@@ -106,7 +75,7 @@
 				<a href="#" class="prev">이전</a>
 				
 				<% for(int i = 1; i<=totalPage; i++) { %>
-					<a href="#" class="num"><%=i %></a>
+					<a href="./list.jsp?pg=<%= i %>" class="num"><%=i %></a>
 				<% } %>
 				
 				<a href="#" class="next">다음</a>

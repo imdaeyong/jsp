@@ -31,8 +31,10 @@ public class SQL { //sql들 이렇게 모으면되는거 넘 깔끔하고
 																							+ "regip=?,"
 																							+ "rdate=NOW();";
 	public static final String SELECT_LIST = "SELECT a.*,b.nick FROM `JSP_BOARD` AS a "
-																					+ "JOIN `JSP_USER` AS b ON a.uid=b.uid;"; 
-
+																					+ "JOIN `JSP_USER` AS b ON a.uid=b.uid " 
+																					+	"ORDER BY seq DESC "
+																					+	"LIMIT ?,10;";
+	
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `JSP_BOARD`;";
 	
 }
