@@ -1,9 +1,8 @@
 	//2019 05 15 회원약관 동의안하면 못넘어감
 			$(document).ready(function() {	//$(window).ready(function() { 브라우저 객체 대체가능
-				
-								
-				$('.btnNext').click(function (){	//$('.btnNext').click(a){ 이렇게 바꿀수도 있음 var a = function() {} 
+					$('.btnNext').click(function (){	//$('.btnNext').click(a){ 이렇게 바꿀수도 있음 var a = function() {} 
 					
+						
 					var chk1 = $('input[name=chk1]').is(':checked');
 					var chk2 = $('input[name=chk2]').is(':checked');
 							

@@ -10,30 +10,24 @@
 	Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
-
 	String terms = null;
 	String privacy = null;
 	
 	try{
-		
-		conn = DBConfig.getConnection();
-		
+		//1단계,2단계	
+		conn = DBConfig.getConnection(); //DBConfig안에
 		//3단계 sql 실행객체 생성
 		stmt = conn.createStatement();
-		
 		//4단계 sql 생성
-		rs = stmt.executeQuery(SQL.SELECT_TERMS);
-		
+		rs = stmt.executeQuery(SQL.SELECT_TERMS);//SQL 클래스 안에 SELECT_TERMS이라는 변수안에 있는 SQL문을 읽어옴
 		//5단계 결과셋 처리
 		if(rs.next()) {
 					terms = rs.getString(1);
 					privacy = rs.getString(2);
-		}
-			
+		}			
 	}catch(Exception e){
 		e.printStackTrace();
-		
-	//6단계 데이터베이스 종료
+		//6단계 데이터베이스 종료
 	}finally{
 		rs.close();
 		stmt.close();
@@ -82,7 +76,9 @@
 			
 			<div>
 				<a href="/board1/user/login.jsp" class="btnCancel">취소</a>
-				<a href="/board1/user/register.jsp" class="btnNext">다음</a> <%-- a태그는 자체적으로 클릭 이벤트를 가지구 있다! --%>
+				<a href="/board1/user/register.jsp" class="btnNext">다음</a> 
+				
+				<%-- a태그는 자체적으로 클릭 이	벤트를 가지고있어서 비활성화 시켜줘야함! --%>
 			</div>
 			
 		</div>

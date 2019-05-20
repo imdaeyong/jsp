@@ -1,3 +1,4 @@
+<%@page import="kr.co.board1.service.BoardService"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.co.board1.bean.BoardBean"%>
@@ -8,16 +9,25 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="kr.co.board1.bean.UserBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
+
 <%
 	UserBean ub = (UserBean) session.getAttribute("user"); //userbean 세션이름
 	String nick = null;
-	
+		
 	List<BoardBean> list = new ArrayList<>();
+	int totalPage = 0;
 	
 	if(ub==null) {
 		//로그인을 안했을때
 		response.sendRedirect("./user/login.jsp?result=101");
 	}else{
+		
+		BoardService bs = new BoardService();
+		int total = bs.getTotalBoard(); //getTotalBoard에서 리턴값인 총 게시물수(total) 받아옴
+		totalPage = bs.getTotalPage(total); //getTotalPage에 대입.  getTotalBoard - > getTotalPage // 총 페이지수를 리턴값으로 받아옴
+		
+		
+		
 		//로그인을 했을때
 		nick = ub.getNick();
 		
@@ -54,10 +64,7 @@
 		rs.close();
 		psmt.close();
 		conn.close();
-	}
-	
-	
-	
+	}	
 	
 %>
 <!DOCTYPE html>
@@ -97,7 +104,11 @@
 			<nav class="paging">
 				<span> 
 				<a href="#" class="prev">이전</a>
-				<a href="#" class="num">1</a>
+				
+				<% for(int i = 1; i<=totalPage; i++) { %>
+					<a href="#" class="num"><%=i %></a>
+				<% } %>
+				
 				<a href="#" class="next">다음</a>
 				</span>
 			</nav>
