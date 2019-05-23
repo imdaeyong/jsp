@@ -30,11 +30,25 @@ public class SQL { //sql들 이렇게 모으면되는거 넘 깔끔하고
 																							+ "uid=?,"
 																							+ "regip=?,"
 																							+ "rdate=NOW();";
+	
 	public static final String SELECT_LIST = "SELECT a.*,b.nick FROM `JSP_BOARD` AS a "
-																					+ "JOIN `JSP_USER` AS b ON a.uid=b.uid " 
+																					+ "JOIN `JSP_USER` AS b ON a.uid=b.uid "
+																					+ "WHERE parent =0 "
 																					+	"ORDER BY seq DESC "
 																					+	"LIMIT ?,10;";
 	
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `JSP_BOARD`;";
+	public static final String SELECT_VIEW = "SELECT * FROM `JSP_BOARD` WHERE seq=?";
+	public static final String UPDATE_HIT = "UPDATE `JSP_BOARD` SET hit=hit+1 WHERE seq=?";
+	public static final String DELETE_BOARD = "DELETE FROM `JSP_BOARD` WHERE seq=?;";
 	
+	public static final String INSERT_COMMENT = "INSERT INTO `JSP_BOARD` SET "
+																									+"parent=?,"
+																									+"content=?,"
+																									+"uid=?,"
+																									+"regip=?,"
+																									+"rdate=NOW()";
+	public static final String SELECT_COMMENT_LIST = "SELECT a.*, b.nick FROM `JSP_BOARD` AS a "
+																											+ "JOIN `JSP_USER` AS b ON a.uid=b.uid "
+																											+ "WHERE parent=? ORDER BY seq ASC;";
 }

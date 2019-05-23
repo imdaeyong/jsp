@@ -9,7 +9,6 @@ import java.util.List;
 import kr.co.board1.bean.BoardBean;
 import kr.co.board1.config.DBConfig;
 import kr.co.board1.config.SQL;
-import sun.security.jca.GetInstance;
 
 public class BoardService {
 
@@ -25,6 +24,22 @@ public class BoardService {
 		return total - start;
 	}
 	
+	// 현재 페이지 
+	public int getCurrentPage(String pg) {
+		
+		int current = 0;
+		
+		if(pg == null) {
+			current = 1;
+		}else {
+			current = Integer.parseInt(pg);
+		}
+		
+		return current;
+	}
+
+	
+	
 	public int getStartForLimit(String pg ) { //Limit 용 start 값 구하기
 		
 		int start = 0;
@@ -37,6 +52,26 @@ public class BoardService {
 		
 		return (start -1) *10;		
 	}
+	
+	// 페이지그룹 계산하기
+		public int[] getPageGroupStartEnd(String pg, int totalPage) {
+			int[] groupStartEnd = new int[2];
+			
+			int current = getCurrentPage(pg);
+			int currentGroup = (int) Math.ceil(current/10.0);
+			int groupStart = (currentGroup - 1) * 10 + 1;
+			int groupEnd   = currentGroup * 10;
+			
+			if(groupEnd > totalPage){
+				groupEnd = totalPage;
+			}
+			
+			groupStartEnd[0] = groupStart;
+			groupStartEnd[1] = groupEnd;
+			
+			return groupStartEnd;
+		}
+
 	
 	public int getTotalPage(int boardTotal)  { //전체 페이지 수 구하기
 				
@@ -123,5 +158,100 @@ public class BoardService {
 		
 	}
 	
-	
+	// 조회수 업데이터
+		public void updateHit(String seq) throws Exception {
+			//1단계, 2단계
+			Connection conn = DBConfig.getConnection();
+			
+			//3단계
+			PreparedStatement psmt = conn.prepareStatement(SQL.UPDATE_HIT);
+			psmt.setString(1, seq);	
+			
+			//4단계
+			psmt.executeUpdate();
+			
+			//5단계		
+			//6단계
+			psmt.close();
+			conn.close();		
+		}
+		
+		// 글보기 SELECT
+		public BoardBean viewBoard(String seq) throws Exception {
+			//1단계, 2단계
+			Connection conn = DBConfig.getConnection();
+			
+			//3단계
+			PreparedStatement psmt = conn.prepareStatement(SQL.SELECT_VIEW);
+			psmt.setString(1, seq);
+			
+			//4단계
+			ResultSet rs = psmt.executeQuery();
+			
+			//5단계
+			BoardBean bb = new BoardBean();
+			
+			if(rs.next()){		
+				bb.setSeq(rs.getInt(1));
+				bb.setParent(rs.getInt(2));
+				bb.setComment(rs.getInt(3));
+				bb.setCate(rs.getString(4));
+				bb.setTitle(rs.getString(5));
+				bb.setContent(rs.getString(6));
+				bb.setFile(rs.getInt(7));
+				bb.setHit(rs.getInt(8));
+				bb.setUid(rs.getString(9));
+				bb.setRegip(rs.getString(10));
+				bb.setRdate(rs.getString(11));				
+			}
+			
+			//6단계
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+			return bb;
+		}
+
+		//댓글리스트 가져오기
+		public List<BoardBean> commentList(String parent) throws Exception {
+			//1,2단계
+			Connection conn = DBConfig.getConnection();
+			
+			//3단계
+			PreparedStatement psmt = conn.prepareStatement(SQL.SELECT_COMMENT_LIST);
+			psmt.setString(1, parent); //int로 해도 되지만 파스인트하기 귀찮으면 그냥 해도 차이는 없음,
+			
+			//4단계
+			ResultSet rs = psmt.executeQuery();
+			
+			//5단계
+			ArrayList<BoardBean> list = new ArrayList<>(); ///*BoardBean생략해도됨 뒤에
+			
+			while(rs.next() ) {
+				BoardBean bb = new BoardBean();
+				bb.setSeq(rs.getInt(1));
+				bb.setParent(rs.getInt(2));
+				bb.setComment(rs.getInt(3));
+				bb.setCate(rs.getString(4));
+				bb.setTitle(rs.getString(5));
+				bb.setContent(rs.getString(6));
+				bb.setFile(rs.getInt(7));
+				bb.setHit(rs.getInt(8));
+				bb.setUid(rs.getString(9));
+				bb.setRegip(rs.getString(10));
+				bb.setRdate(rs.getString(11));
+				bb.setNick(rs.getString(12));
+				
+				list.add(bb);
+			}
+			//6단계
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+			return list;
+		}
+		
+
 }
