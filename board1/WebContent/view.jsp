@@ -90,7 +90,7 @@
 						<a href="#" class="mod">수정</a>
 					</div>
 				</div>
-				<%
+				<%					
 					for(BoardBean comment : commentList) {
 				%>			
 				<div class="comment">
@@ -100,7 +100,7 @@
 					</span>
 					<textarea><%=comment.getContent() %></textarea>
 					<div>
-						<a href="#" class="del">삭제</a>
+						<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="./proc/delete.jsp?seq=<%= comment.getSeq() %>&parent=<%= seq %>&pg=<%= pg %> class="del">삭제</a>
 						<a href="#" class="mod">수정</a>
 					</div>
 				</div>
@@ -147,7 +147,7 @@
 								if(content =="") {
 									alert('댓글 내용을 입력하세요');
 									textarea.focus();
-									
+																		
 								}else {
 									var jsonData = {parent:parent , content:content}; // 앞의 content = 데이터이름( key): value 뒤의content = 위의 변수
 																		
@@ -167,13 +167,14 @@
 											commentNew.find('textarea').text(result.content);
 											
 											comments.append(commentNew);
-													
+											textarea.val('');		
 											//	empty 문구 삭제
 											var empty =$('.empty');
 											
 											if(empty.is(':visible')){
 												empty.remove();												
 											}
+											
 											
 											
 										}

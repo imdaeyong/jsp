@@ -5,17 +5,26 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String seq = request.getParameter("seq");
-	String pg = request.getParameter("pg");
+	String seq 		= request.getParameter("seq");
+	String parent	= request.getParameter("parent");
+	String pg 			= request.getParameter("pg");
+
 
 	Connection conn = DBConfig.getConnection();
 		
 	PreparedStatement psmt = conn.prepareStatement(SQL.DELETE_BOARD);
 	psmt.setString(1,seq);
+	
 	psmt.executeUpdate();
 	
 	psmt.close();
 	conn.close();
 
-	response.sendRedirect("../list.jsp?pg="+pg);
+
+	if(parent==null) {
+		response.sendRedirect("../list.jsp?pg="+pg);
+	}else{
+		response.sendRedirect("../view.jsp?seq="+parent+"&pg="+pg);
+	}
+	
 %>

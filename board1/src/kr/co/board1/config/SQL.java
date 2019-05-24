@@ -30,6 +30,9 @@ public class SQL { //sql들 이렇게 모으면되는거 넘 깔끔하고
 																							+ "uid=?,"
 																							+ "regip=?,"
 																							+ "rdate=NOW();";
+	public static final String SELECT_MAX_SEQ = "SELECT MAX(seq) FROM `JSP_BOARD`;";
+	
+	public static final String INSERT_FILE = "INSERT INTO `JSP_FILE` (`parent`,`oldName`,`newName`,`rdate`) VALUES (?,?,?,NOW());";
 	
 	public static final String SELECT_LIST = "SELECT a.*,b.nick FROM `JSP_BOARD` AS a "
 																					+ "JOIN `JSP_USER` AS b ON a.uid=b.uid "
@@ -51,4 +54,9 @@ public class SQL { //sql들 이렇게 모으면되는거 넘 깔끔하고
 	public static final String SELECT_COMMENT_LIST = "SELECT a.*, b.nick FROM `JSP_BOARD` AS a "
 																											+ "JOIN `JSP_USER` AS b ON a.uid=b.uid "
 																											+ "WHERE parent=? ORDER BY seq ASC;";
+	
+	public static final String SELECT_COUNT_COMMENT = "SELECT COUNT(*) AS cnt FROM `JSP_BOARD` a , `JSP_BOARD` b "
+																												+ "WHERE b.parent = ? && a.seq=b.parent;";
+	
+		
 }

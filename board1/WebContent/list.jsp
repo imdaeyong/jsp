@@ -19,6 +19,7 @@
 	int totalPage = 0;
 	int current  = 0;
 	int[] groupStartEnd = new int[2];
+	int cntComment = 0;
 	
 	if(ub==null) {
 		//로그인을 안했을때
@@ -37,6 +38,7 @@
 		totalPage = bs.getTotalPage(total);
 		list = bs.getBoardList(start);
 		listCount = bs.getListStartCount(total, start); //목록 출력용 번호
+		
 		
 		// 목록 페이지 그룹 번호
 				groupStartEnd = bs.getPageGroupStartEnd(pg, totalPage);
@@ -68,10 +70,13 @@
 						<td>조회</td>
 					</tr>
 					 
-				<% for(BoardBean bb:list) { %>
+				<% for(BoardBean bb:list) {
+						BoardService bs = BoardService.GetInstance();
+						cntComment = bs.cntComment(bb.getSeq());
+				%>
 					<tr>
 						<td><%=listCount-- %></td>
-						<td><a href="./view.jsp?pg=<%= current %>&seq=<%= bb.getSeq() %>"><%= bb.getTitle() %></a>&nbsp;[<%= bb.getComment() %>]</td>
+						<td><a href="./view.jsp?pg=<%= current %>&seq=<%= bb.getSeq() %>"><%= bb.getTitle() %></a>&nbsp;[<%=cntComment	%>]</td>
 						<td><%= bb.getNick() %></td>
 						<td><%= bb.getRdate().substring(2,10) %></td>
 						<td><%= bb.getHit() %></td>						
