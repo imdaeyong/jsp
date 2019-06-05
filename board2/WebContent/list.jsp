@@ -1,5 +1,5 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
+<%@ taglib prefix ="c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,7 +12,7 @@
 			<h3>글목록</h3>
 			<!-- 리스트 -->
 			<div class="list">
-				<p class="logout">님! 반갑습니다. <a href="/board2/user/proc/logout.jsp">[로그아웃]</a><p>
+				<p class="logout">${user.nick }님! 반갑습니다. <a href="/board2/user/logout.do">[로그아웃]</a><p>
 				<table>
 					<tr>
 						<td>번호</td>
@@ -22,25 +22,29 @@
 						<td>조회</td>
 					</tr>
 					 
-					<tr>
-						<td>1</td>
-						<td><a href="#">타이틀</a>&nbsp;[3]</td>
-						<td>홍길동</td>
-						<td>19-05-31</td>
-						<td>12</td>						
-					</tr>
-						
+					 <%--모델2에서는 <% 안쓰고 jsp 태그를 쓴다 --%>
+					 <c:forEach var="vo" items="${requestScope.list }">		 
+						<tr>
+							<td>${count=count-1}</td>
+							<td><a href="#">${vo.title}</a>&nbsp;[${vo.comment}]</td>
+							<td>${vo.nick}</td>
+							<td>${vo.rdate.substring(2,10)}</td>
+							<td>${vo.hit}</td>						
+						</tr>
+					</c:forEach>	
 				</table>
 			</div>
 			<!-- 페이징 -->
 			<nav class="paging">
 				<span> 		
-					<a href="#" class="prev"></a>
-					<a href="#" class="num "></a>			
+					<a href="#" class="prev">이전</a>
+					<c:forEach var ="i" begin="1" end="${page}">
+						<a href="/board2/list.do?pg=${i}" class="num ">${i}</a>
+					</c:forEach>
 					<a href="#" class="next">다음</a>
 			</span>
 			</nav>
-			<a href="/board2/write.jsp" class="btnWrite">글쓰기</a>
+			<a href="/board2/write.do" class="btnWrite">글쓰기</a>
 		</div>
 	</body>
 

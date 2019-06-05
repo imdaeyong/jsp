@@ -91,23 +91,6 @@ public class MainController extends HttpServlet {
 		CommonService  instance = (CommonService) instances.get(action);//오브젝트로 받아도 되지만 그러면 기능을 쓸수 없음
 		String result = instance.requestProc(req,resp); //CommonService (implements 해놓은 인터페이스!) 
 	
-//		if(action.equals("/hello.do")) {
-//			Hello hello= new Hello();
-//			view = hello.requestProc(req, resp); // 이과정으로 하려면 들어올때마다 해줘야함, 1초에 수백번 들어올수도 있는데 이러면 서버박살남
-//			
-//		}else if(action.equals("/greeting.do")){
-//			Greeting greeting= new Greeting();
-//			view = greeting.requestProc(req, resp); 
-//			
-//		}else if(action.equals("/welcome.do")){
-//			Welcome welcome= new Welcome();
-//			view = welcome.requestProc(req, resp); 
-//			
-//		}else if(action.equals("/introduce.do")) {
-//			Introduce introduce= new Introduce();
-//			view =introduce.requestProc(req, resp); 
-//		}
-		
 		if(result.startsWith("redirect:")) {
 			String redirect = result.substring(9);
 			resp.sendRedirect(redirect);
@@ -116,14 +99,13 @@ public class MainController extends HttpServlet {
 			PrintWriter out = resp.getWriter();
 			out.print(result);
 		}else {
-			// view 포워드
+			// view 포워드	
 			RequestDispatcher dispatcher = req.getRequestDispatcher(result);
 			dispatcher.forward(req, resp);
 		}
-
-		}
+	}
 		
 	
-	}
+}
 
 

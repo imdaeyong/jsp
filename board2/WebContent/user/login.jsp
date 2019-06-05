@@ -10,7 +10,7 @@
 	<body>
 		<div id="member">
 			<section class="login">		
-				<form action="/board2/user/proc/login.jsp" method="post"> <%-- get으로 method 보내면 다 노출되니까 포스트로 보내야함 --%>
+				<form action="/board2/user/login.do" method="post"> <%-- get으로 method 보내면 다 노출되니까 포스트로 보내야함 --%>
 					<table>
 						<tr>
 							<td><img src="/board2/img/login_ico_id.png" alt="아이디" /></td>

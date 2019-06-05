@@ -4,7 +4,7 @@ public class SQL { //sql들 이렇게 모으면되는거 넘 깔끔하고
 	
 	// 회원관련
 	public static final String SELECT_TERMS =  "SELECT * FROM `JSP_TERMS`;";
-	public static  final String SELECT_USER = "SELECT  * FROM `JSP_USER` WHERE uid=? AND pass=PASSWORD(?);"; //PASSWORD 암호를 암호화해주는 함수
+	public static final String SELECT_USER = "SELECT  * FROM `JSP_USER` WHERE uid=? AND pass=PASSWORD(?);"; //PASSWORD 암호를 암호화해주는 함수
 	public static final String INSERT_USER = "INSERT INTO `JSP_USER` SET " //public을 붙여서 사용할수있게하고 static을 붙여서 new를 안써도 register에서 사용할수있게함
 																					+ "uid=?,"
 																					+ "pass=PASSWORD(?),"

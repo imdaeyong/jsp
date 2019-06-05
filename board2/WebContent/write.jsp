@@ -10,7 +10,7 @@
 		<div id="board">
 			<h3>글쓰기</h3>
 			<div class="write">
-				<form action="/board2/proc/write.jsp" method="post" enctype="multipart/form-data">
+				<form action="/board2/write.do" method="post" >
 					<table>
 						<tr>
 							<td>제목</td>
