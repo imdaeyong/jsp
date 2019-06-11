@@ -4,8 +4,9 @@
 		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 		<script src="/farmstory/js/zipcode.js"></script>
 		<script src="/farmstory/js/userDuplicateCheck.js"></script>
-		<script>
-			
+		<script src="/farmstory/js/termsCheck.js"></script>
+		<script src="/farmstory/js/userRegValidation.js"></script>
+		<script>			
 			$(function(){
 				
 				$('input[name=id]').focusout(function(){
@@ -24,8 +25,7 @@
 						}
 					});					
 				});													
-			});	
-		
+			});			
 		</script>
 		<div id="member">
 			<section class="register">
