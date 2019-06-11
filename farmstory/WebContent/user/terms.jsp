@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ include file ="../_head.jsp" %>	
-
+<script src="/farmstory/js/termsCheck.js"></script>
 <div id="terms">
 			<section>
 				<table>
