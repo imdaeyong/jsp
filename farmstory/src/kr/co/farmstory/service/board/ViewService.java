@@ -10,7 +10,7 @@ public class ViewService implements CommonService  {
 	@Override
 	public String requestProc(HttpServletRequest req, HttpServletResponse resp) {
 		// TODO Auto-generated method stub
-		return "/view.jsp";
+		return "/board/view.jsp";
 	}
 
 }

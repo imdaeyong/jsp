@@ -14,13 +14,13 @@
             <nav>
               <img src="/farmstory/img/sub_nav_tit_cate1_tit1.png" alt="ì¸ì¬ë§"/>
               <p>
-                HOME > íì¤í ë¦¬ìê° > <span>ì¸ì¬ë§</span>
+                HOME > 팜스토리소개 <span>인사말</span>
               </p>
             </nav>
-            <!-- ì»¨íì¸  ë´ì© ìì -->
-            <h3>ë´ì©ì ìë ¥íì¸ì.</h3>
+            
+            <h3>안녕하세요.</h3>
 
-            <!-- ì»¨íì¸  ë´ì© ë -->
+            
           </article>
         </section>
       </section>

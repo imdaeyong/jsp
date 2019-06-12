@@ -1,11 +1,11 @@
 package kr.co.farmstory.config;
 
-public class SQL { //sqlµé ÀÌ·¸°Ô ¸ðÀ¸¸éµÇ´Â°Å ³Ñ ±ò²ûÇÏ°í
+public class SQL { //sqlï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç´Â°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
 	
-	// È¸¿ø°ü·Ã
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static final String SELECT_TERMS =  "SELECT * FROM `JSP_TERMS`;";
-	public static final String SELECT_USER = "SELECT  * FROM `JSP_USER` WHERE uid=? AND pass=PASSWORD(?);"; //PASSWORD ¾ÏÈ£¸¦ ¾ÏÈ£È­ÇØÁÖ´Â ÇÔ¼ö
-	public static final String INSERT_USER = "INSERT INTO `JSP_USER` SET " //publicÀ» ºÙ¿©¼­ »ç¿ëÇÒ¼öÀÖ°ÔÇÏ°í staticÀ» ºÙ¿©¼­ new¸¦ ¾È½áµµ register¿¡¼­ »ç¿ëÇÒ¼öÀÖ°ÔÇÔ
+	public static final String SELECT_USER = "SELECT  * FROM `JSP_USER` WHERE uid=? AND pass=PASSWORD(?);"; //PASSWORD ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½È£È­ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ô¼ï¿½
+	public static final String INSERT_USER = "INSERT INTO `JSP_USER` SET " //publicï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½Ö°ï¿½ï¿½Ï°ï¿½ staticï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ newï¿½ï¿½ ï¿½È½áµµ registerï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½Ö°ï¿½ï¿½ï¿½
 																					+ "uid=?,"
 																					+ "pass=PASSWORD(?),"
 																					+ "name=?,"
@@ -18,13 +18,14 @@ public class SQL { //sqlµé ÀÌ·¸°Ô ¸ðÀ¸¸éµÇ´Â°Å ³Ñ ±ò²ûÇÏ°í
 																					+ "regip=?,"
 																					+ "rdate=NOW();";
 																					
-	public static final String SELECT_USER_COUNT="SELECT COUNT(*) FROM `JSP_USER` WHERE uid=?;"; //ÀÌ·¸°Ô ÇÏ·Á¸é ¹«Á¶°Ç preparedstatement·Î ½á¾ßÇÔ
+	public static final String SELECT_USER_COUNT="SELECT COUNT(*) FROM `JSP_USER` WHERE uid=?;"; //ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ preparedstatementï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static final String SELECT_NICK_COUNT="SELECT COUNT(*) FROM `JSP_USER` WHERE nick=?;"; 
 	public static final String SELECT_EMAIL_COUNT="SELECT COUNT(*) FROM `JSP_USER` WHERE email=?;";
 	public static final String SELECT_HP_COUNT="SELECT COUNT(*) FROM `JSP_USER` WHERE hp=?;"; 
 	
-	// °Ô½ÃÆÇ°ü·Ã
+	// ï¿½Ô½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½
 	public static final String INSERT_BOARD = "INSERT INTO `JSP_BOARD` SET "
+																							+ "cate=?,"
 																							+ "title=?,"
 																							+ "content=?,"
 																							+ "file=?, "
@@ -37,11 +38,12 @@ public class SQL { //sqlµé ÀÌ·¸°Ô ¸ðÀ¸¸éµÇ´Â°Å ³Ñ ±ò²ûÇÏ°í
 	
 	public static final String SELECT_LIST = "SELECT a.*,b.nick FROM `JSP_BOARD` AS a "
 																					+ "JOIN `JSP_USER` AS b ON a.uid=b.uid "
-																					+ "WHERE parent =0 "
+																					+ "WHERE parent =0 AND cate=? "
 																					+	"ORDER BY seq DESC "
 																					+	"LIMIT ?,10;";
 	
-	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `JSP_BOARD`;";
+	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `JSP_BOARD` "
+																										+ "WHERE cate=?;";
 	
 	public static final String SELECT_VIEW = "SELECT * FROM `JSP_BOARD` AS a " 
 																					+	"LEFT JOIN `JSP_FILE` AS b "
