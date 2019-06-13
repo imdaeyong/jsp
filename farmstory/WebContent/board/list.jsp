@@ -40,7 +40,7 @@
 					<a href="#" class="next">다음</a>
 			</span>
 			</nav>
-			<a href="/farmstory/board/write.do?grp=" class="btnWrite">글쓰기</a>
+			<a href="/farmstory/board/write.do?grp=${grp}&cate=${cate}" class="btnWrite">글쓰기</a>
 		</div>
       <!-- 컨텐츠 내용 끝 -->
           </article>

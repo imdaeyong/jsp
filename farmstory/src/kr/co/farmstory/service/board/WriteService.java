@@ -13,19 +13,28 @@ public class WriteService implements CommonService {
 
 	@Override
 	public String requestProc(HttpServletRequest req, HttpServletResponse resp) {
-	
+			
 		if(req.getMethod().equals("GET")) {
+
+			String grp 		= req.getParameter("grp");
+			String cate 	= req.getParameter("cate");
+			req.setAttribute("grp", grp);
+			req.setAttribute("cate", cate);//이까지해주면 WriteService에서 이걸 사용할수있음 (get방식)
+			
 			return "/board/write.jsp";	
 		}else {
-			String title 			= req.getParameter("subject"); //write에서 넘어오는거 받아줘야함.
+			
+			String title 	= req.getParameter("subject"); //write에서 넘어오는거 받아줘야함.
 			String content 	= req.getParameter("content");
-			String regip 		= req.getRemoteAddr();
+			String grp 		= req.getParameter("grp");
+			String cate 	= req.getParameter("cate");
+			String regip 	= req.getRemoteAddr();
 			
 			HttpSession session =  req.getSession();
 			UserVO user = (UserVO)session.getAttribute("user");
 								
 			BoardVO vo =new BoardVO();
-			vo.setCate("story");
+			vo.setCate(cate);
 			vo.setTitle(title);
 			vo.setContent(content);
 			vo.setFile(0);
@@ -41,7 +50,7 @@ public class WriteService implements CommonService {
 				e.printStackTrace();
 			}
 		
-		return "redirect:/farmstory/board/list.do";		
+		return "redirect:/farmstory/board/list.do?grp="+grp+"&cate="+cate;		
 		}
 	}
 
