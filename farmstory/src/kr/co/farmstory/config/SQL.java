@@ -23,7 +23,9 @@ public class SQL { //sql�� �̷��� ������Ǵ°� �� �
 	public static final String SELECT_EMAIL_COUNT="SELECT COUNT(*) FROM `JSP_USER` WHERE email=?;";
 	public static final String SELECT_HP_COUNT="SELECT COUNT(*) FROM `JSP_USER` WHERE hp=?;"; 
 	
-	// �Խ��ǰ���
+	// 게시판관련
+	public static final String SELECT_LATEST = "SELECT * FROM `JSP_BOARD` WHERE cate=? ORDER BY SEQ DESC LIMIT 5";
+	
 	public static final String INSERT_BOARD = "INSERT INTO `JSP_BOARD` SET "
 																							+ "cate=?,"
 																							+ "title=?,"
@@ -37,19 +39,19 @@ public class SQL { //sql�� �̷��� ������Ǵ°� �� �
 	public static final String INSERT_FILE = "INSERT INTO `JSP_FILE` (`parent`,`oldName`,`newName`,`rdate`) VALUES (?,?,?,NOW());";
 	
 	public static final String SELECT_LIST = "SELECT a.*,b.nick FROM `JSP_BOARD` AS a "
-																					+ "JOIN `JSP_USER` AS b ON a.uid=b.uid "
-																					+ "WHERE parent =0 AND cate=? "
-																					+	"ORDER BY seq DESC "
-																					+	"LIMIT ?,10;";
+										+ "JOIN `JSP_USER` AS b ON a.uid=b.uid "
+										+ "WHERE parent =0 AND cate=? "
+										+	"ORDER BY seq DESC "
+										+	"LIMIT ?,10;";
 	
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `JSP_BOARD` "
 																										+ "WHERE cate=?;";
 	
 	public static final String SELECT_VIEW = "SELECT * FROM `JSP_BOARD` AS a " 
-																					+	"LEFT JOIN `JSP_FILE` AS b "
-																					+	"ON a.seq = b.parent "
-																					+	"WHERE seq=?;";
-	
+											+	"LEFT JOIN `JSP_FILE` AS b "
+											+	"ON a.seq = b.parent "
+											+	"WHERE seq=?;";
+
 	public static final String UPDATE_HIT = "UPDATE `JSP_BOARD` SET hit=hit+1 WHERE seq=?";
 	public static final String UPDATE_DOWNLOAD="UPDATE `JSP_FILE` SET download=download+1 WHERE parent=?";
 	
