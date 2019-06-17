@@ -8,39 +8,43 @@ import kr.co.board2.controller.CommonService;
 import kr.co.board2.dao.UserDao;
 import kr.co.board2.vo.UserVO;
 
-public class LoginService  implements CommonService {
+public class LoginService implements CommonService {
 
 	@Override
 	public String requestProc(HttpServletRequest req, HttpServletResponse resp) {
 		
 		if(req.getMethod().equals("GET")) {
 			
-			return "/user/login.jsp"; //get¿äÃ»ÀÓ ÀÌ°Ç
+			return "/user/login.jsp";
 			
 		}else {
 			
-			String uid = req.getParameter("id");
-			String pass= req.getParameter("pw");
+			String uid  = req.getParameter("id");
+			String pass = req.getParameter("pw");
 			
 			UserDao dao = UserDao.GetInstance();
+			
 			UserVO vo = null;
 			
 			try {
-				vo = dao.login(uid, pass);			
-			}catch (Exception e) {
+				vo = dao.login(uid, pass);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			//¼¼¼ÇÃ³¸®
-			if(vo!= null) { //È¸¿øÀÌ ¸ÂÀ» °æ¿ì
-				//¼¼¼ÇÀ» ¹Ù·Î ¸ø¾²¹Ç·Î ¼¼¼ÇÀ» ±¸ÇØ¾ßÇÔ ¸ğµ¨1¿¡¼­´Â ¹Ù·Î ¾µ¼öÀÖ¾ú´Âµ¥ 2¿¡¼­´Â ¾È‰Î
-				HttpSession session= req.getSession();
+			
+			// ì„¸ì…˜ì²˜ë¦¬
+			if(vo != null) {
+				// íšŒì› ì¼ ê²½ìš°
+				HttpSession session = req.getSession();
 				session.setAttribute("user", vo);
-				return "redirect:/board2/list.do"; //È¸¿øÀÌ ¸ÂÀ¸¸é ¸ñ·ÏÀ¸·Î µÇµ¹¾Æ°¨
+				return "redirect:/board2/list.do";	
 			}else {
-				//È¸¿øÀÌ ¾Æ´Ò°æ¿ì
+				// íšŒì›ì´ ì•„ë‹ ê²½ìš°
 				return "redirect:/board2/user/login.do?result=fail";
-			}	
-		
+			}
+			
 		}
+		
 	}
+
 }

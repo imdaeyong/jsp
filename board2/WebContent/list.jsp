@@ -12,7 +12,6 @@
 			<h3>글목록</h3>
 			<!-- 리스트 -->
 			<div class="list">
-				<p class="logout">${user.nick }님! 반갑습니다. <a href="/board2/user/logout.do">[로그아웃]</a><p>
 				<table>
 					<tr>
 						<td>번호</td>
@@ -23,10 +22,10 @@
 					</tr>
 					 
 					 <%--모델2에서는 <% 안쓰고 jsp 태그를 쓴다 --%>
-					 <c:forEach var="vo" items="${requestScope.list }">		 
+					 <c:forEach var="vo" items="${list}"><%--requestScope.생략 --%>		 
 						<tr>
 							<td>${count=count-1}</td>
-							<td><a href="#">${vo.title}</a>&nbsp;[${vo.comment}]</td>
+							<td><a href="/board2/view.do?seq=${vo.seq}">${vo.title}</a>&nbsp;[${vo.comment}]</td> 
 							<td>${vo.nick}</td>
 							<td>${vo.rdate.substring(2,10)}</td>
 							<td>${vo.hit}</td>						

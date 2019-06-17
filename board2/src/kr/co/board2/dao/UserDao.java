@@ -51,7 +51,7 @@ public class UserDao {
 			// 1단
 			Connection conn = DBConfig.getConnection();
 
-			// 3´Ü°è
+			// 3단계
 			PreparedStatement psmt = conn.prepareStatement(SQL.INSERT_USER);
 			psmt.setString(1, vo.getUid());
 			psmt.setString(2, vo.getPass());
@@ -64,11 +64,11 @@ public class UserDao {
 			psmt.setString(9, vo.getAddr2());
 			psmt.setString(10, vo.getRegip());
 
-			// 4´Ü°è
+			// 4단계
 			psmt.executeUpdate();
 
-			// 5´Ü°è
-			// 6´Ü°è
+			// 5단계
+			// 6단계
 			psmt.close();
 			conn.close();
 		}

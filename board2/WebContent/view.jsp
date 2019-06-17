@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-
+<%@ taglib prefix ="c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,42 +9,44 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	</head>
 
-	<body>	
-	
+	<body>		
 		<div id="board">
-			<h3>글보기</h3>
-			<div class="view">
-				<form action="#" method="post">
-					<table>
+		<h3>글보기</h3>
+		<div class="view">
+		<c:forEach var="vo" items="${list}">
+			<form action="#" method="post">
+				<table>
+				
+					<tr>
+						<td>제목</td>
+						<td><input type="text" name="subject" value="${vo.title}" readonly /></td>
+					</tr>
+								
 						<tr>
-							<td>제목</td>
-							<td><input type="text" name="subject" value="" readonly />
-							</td>
-						</tr>
-									
-							<tr>
-								<td>첨부파일</td>
-								<td>
-									<a href="#">파일명</a>
-									<span>회 다운로드</span>
-								</td>
-							</tr>
-					
-						<tr>
-							<td>내용</td>
+							<td>첨부파일</td>
 							<td>
-								<textarea name="content" rows="20" readonly></textarea>
+								<a href="#">파일명</a>
+								<span>회 다운로드</span>
 							</td>
-						</tr>
-					</table>
-					<div class="btns">
-						<a onclick="return confirm('정말로 삭제하시겠습니까?')"	 href="./proc/delete.jsp?pg=&seq=" class="cancel del">삭제</a>
-						<a href="#" class="cancel mod">수정</a>
-						<a href="./list.jsp?pg="  class="cancel">목록</a>
-					</div>
-				</form>
-			</div><!-- view 끝 -->
-			
+						</tr>				
+					<tr>
+						<td>내용</td>
+						<td>							
+							<textarea name="content" rows="20" readonly>
+							<c:out value="${vo.content}"/>
+							</textarea>
+						</td>
+					</tr>
+					
+				</table>
+				<div class="btns">
+					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="/board2/delete.jsp?seq=${vo.seq}" class="cancel del">삭제</a>
+					<a href="#" class="cancel mod">수정</a>
+					<a href="./list.jsp?pg="  class="cancel">목록</a>
+				</div>
+			</form>
+		</div><!-- view 끝 -->
+			</c:forEach>
 			<style>
 			.comments> .comment:nth-of-type(1) {
 				display:none;

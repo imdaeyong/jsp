@@ -9,7 +9,7 @@ import kr.co.board2.controller.CommonService;
 import kr.co.board2.dao.UserDao;
 import kr.co.board2.vo.TermsVO;
 
-public class UidCheckService  implements CommonService {
+public class UidCheckService implements CommonService {
 
 	@Override
 	public String requestProc(HttpServletRequest req, HttpServletResponse resp){
@@ -27,13 +27,11 @@ public class UidCheckService  implements CommonService {
 				e.printStackTrace();
 		}
 		
-		//JSon »ý¼º
 		JSONObject json = new JSONObject();
 		json.put("count", count);
 		
 		return json.toString();
 	}
-
 }
 
 

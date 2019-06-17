@@ -30,7 +30,7 @@
 						</tr>
 					</table>
 					<div class="btns">
-						<a href="#" class="cancel">취소</a>
+						<a href="/board2/list.do" class="cancel">취소</a>
 						<input type="submit" class="submit" value="작성완료" />
 					</div>
 				</form>
