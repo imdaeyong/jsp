@@ -33,7 +33,7 @@
   
   <filter-mapping>
   		<filter-name>encodingFilter</filter-name>
-  		<url-pattern>*</url-pattern>
+  		<url-pattern>UTF-8</url-pattern>
   </filter-mapping>
   
 </web-app>

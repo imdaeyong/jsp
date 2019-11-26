@@ -12,10 +12,33 @@ public class BoardBean {
 	private String uid;
 	private String regip;
 	private String rdate;
-	private String nick;
 	
+	//Ãß°¡
+	private String nick;
+	private String oldName;
+	private int download;
+	private String newName;
+	
+	public String getNewName() {
+		return newName;
+	}
+	public void setNewName(String newName) {
+		this.newName = newName;
+	}
 	public String getNick() {
 		return nick;
+	}
+	public String getOldName() {
+		return oldName;
+	}
+	public void setOldName(String oldName) {
+		this.oldName = oldName;
+	}
+	public int getDownload() {
+		return download;
+	}
+	public void setDownload(int download) {
+		this.download = download;
 	}
 	public void setNick(String nick) {
 		this.nick = nick;

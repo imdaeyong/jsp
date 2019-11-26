@@ -9,7 +9,7 @@ import kr.co.board2.dao.BoardDao;
 import kr.co.board2.vo.BoardVO;
 import kr.co.board2.vo.UserVO;
 
-public class WriteService  implements CommonService {
+public class WriteService implements CommonService {
 
 	@Override
 	public String requestProc(HttpServletRequest req, HttpServletResponse resp) {

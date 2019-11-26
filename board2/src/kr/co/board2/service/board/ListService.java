@@ -74,7 +74,7 @@ public class ListService implements CommonService{
 
 	private int[] getPageGroupStartEnd() {
 		int[] startEnd = new int[2];
-		return startEnd;}
+		return startEnd;
 /*		
 		int current = getCurrentPage(pg);
 		int currentGroup = (int) Math.ceil(current/10.0);

@@ -36,11 +36,14 @@
 	String regip 		= request.getRemoteAddr();
 	String newName = null;
 	int parent =0;
+	int file = 0;
+	
 	
 	UserBean ub = (UserBean) session.getAttribute("user"); //userbean 세션이름
 	String uid = ub.getUid();
 	
 	if(fileName !=null) {
+		file=1;
 		//1.파일명 생성
 		int i = fileName.lastIndexOf(".");
 		String ext = fileName.substring(i); //확장자이름 가져오기
@@ -79,7 +82,6 @@
 		bos.close();
 		fis.close();
 		fos.close();	
-		
 		oldFile.delete();//원본은 이제 필요없기 떄문에 지운다
 		
 	}
@@ -106,8 +108,9 @@
 	PreparedStatement psmt = conn.prepareStatement(SQL.INSERT_BOARD);
 	psmt.setString(1, subject);
 	psmt.setString(2, content);
-	psmt.setString(3, uid);
-	psmt.setString(4, regip);
+	psmt.setInt(3, file);
+	psmt.setString(4, uid);
+	psmt.setString(5, regip);
 	
 	//4단계
 	psmt.executeUpdate();

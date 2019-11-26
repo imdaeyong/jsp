@@ -24,7 +24,7 @@
 	if(parent==null) {
 		response.sendRedirect("../list.jsp?pg="+pg);
 	}else{
-		response.sendRedirect("../view.jsp?seq="+parent+"&pg="+pg);
+		response.sendRedirect("../view.do?seq="+parent+"&pg="+pg);
 	}
 	
 %>

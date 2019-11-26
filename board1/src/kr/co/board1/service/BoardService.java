@@ -143,6 +143,7 @@ public class BoardService {
 				bb.setRegip(rs.getString(10));
 				bb.setRdate(rs.getString(11));
 				bb.setNick(rs.getString(12));
+				
 				list.add(bb);
 			}
 					
@@ -202,7 +203,11 @@ public class BoardService {
 				bb.setHit(rs.getInt(8));
 				bb.setUid(rs.getString(9));
 				bb.setRegip(rs.getString(10));
-				bb.setRdate(rs.getString(11));				
+				bb.setRdate(rs.getString(11));		
+				bb.setOldName(rs.getString(13));
+				bb.setNewName(rs.getString(14));
+				bb.setDownload(rs.getInt(15));
+				
 			}
 			
 			//6´Ü°è

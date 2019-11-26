@@ -25,12 +25,12 @@ public class SQL { //sql들 이렇게 모으면되는거 넘 깔끔하고
 	
 	// 게시판관련
 	public static final String INSERT_BOARD = "INSERT INTO `JSP_BOARD` SET "
-																							+ "title=?,"
-																							+ "content=?,"
-																							+ "file=?, "
-																							+ "uid=?,"
-																							+ "regip=?,"
-																							+ "rdate=NOW();";
+														+ "title=?,"
+														+ "content=?,"
+														+ "file=?, "
+														+ "uid=?,"
+														+ "regip=?,"
+														+ "rdate=NOW();";
 	public static final String SELECT_MAX_SEQ = "SELECT MAX(seq) FROM `JSP_BOARD`;";
 	
 	public static final String INSERT_FILE = "INSERT INTO `JSP_FILE` (`parent`,`oldName`,`newName`,`rdate`) VALUES (?,?,?,NOW());";
